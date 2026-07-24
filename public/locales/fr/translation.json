@@ -1,0 +1,17 @@
+{
+  "menu": {
+    "customers": "Clients",
+    "employees": "Employés",
+    "fin": "Fin",
+    "financial": "Financier",
+    "invoices": "Factures",
+    "logout": "Se déconnecter",
+    "payslips": "Fiches de paie",
+    "per": "Per",
+    "personnel": "Personnel",
+    "timesheets": "Feuilles de temps"
+  },
+  "pagination": {
+    "of": "{{from}} – {{until}} sur {{total}}"
+  }
+}

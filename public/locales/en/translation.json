@@ -1,0 +1,17 @@
+{
+  "menu": {
+    "customers": "Customers",
+    "employees": "Employees",
+    "fin": "Fin",
+    "financial": "Financial",
+    "invoices": "Invoices",
+    "logout": "Log out",
+    "payslips": "Payslips",
+    "per": "Per",
+    "personnel": "Personnel",
+    "timesheets": "Timesheets"
+  },
+  "pagination": {
+    "of": "{{from}} – {{until}} van {{total}}"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "menu": {
+    "customers": "Klanten",
+    "employees": "Werknemers",
+    "fin": "Fin",
+    "financial": "Financieel",
+    "invoices": "Facturen",
+    "logout": "Log uit",
+    "payslips": "Loonfiches",
+    "per": "Per",
+    "personnel": "Personeel",
+    "timesheets": "Uurroosters"
+  },
+  "pagination": {
+    "of": "{{from}} – {{until}} van {{total}}"
+  }
+}
