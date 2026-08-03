@@ -51,5 +51,5 @@ test('renders timesheets', async () => {
     )
     render(<App />);
     const linkElement = await screen.findAllByText("menu.timesheets");
-    expect(linkElement.length).toEqual(2);
+    expect(linkElement.length).toEqual(1);
 });

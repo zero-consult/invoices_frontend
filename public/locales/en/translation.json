@@ -11,7 +11,55 @@
     "personnel": "Personnel",
     "timesheets": "Timesheets"
   },
+  "generate_payslip": {
+    "add_allowance": "Add allowance",
+    "labels": {
+      "employee": "Employee",
+      "month": "Month",
+      "gross_wage": "Gross wage",
+      "period": "Period",
+      "tax_rate": "Tax rate",
+      "allowances": "Allowances"
+    },
+    "net_wage_calc": "Net wage (calculated)",
+    "save": "Save"
+  },
   "pagination": {
     "of": "{{from}} – {{until}} van {{total}}"
+  },
+  "payslipslist": {
+    "today": "Today",
+    "generate": "Generate payslip",
+    "card": {
+      "total": "Total",
+      "gross_total": "Gross total",
+      "net_total": "Net total"
+    },
+    "search": {
+      "placeholder": "Search employee..."
+    },
+    "close_month": "Close month",
+    "table": {
+      "empty": "No payslips found.",
+      "headers": {
+        "employee": "Employee",
+        "period": "Period",
+        "gross_salary": "Gross salary",
+        "status": "Status",
+        "net_salary": "Net salary",
+        "actions": "Actions"
+      }
+    },
+    "action": {
+      "download": "Download"
+    }
+  },
+  "server": {
+    "error": {
+      "aproved_entries_without_payslip": "There are approved timesheet entries without a payslip for the current month",
+      "in_progress_entries": "There are still timesheet entries in progress for the current month",
+      "in_progress_timesheet": "There are still timesheet entries in progress for this employee and month.",
+      "invalid_timesheets_amount": "Need to have exactly 8 hours per working day of approved timesheet entries for this employee and month."
+    }
   }
 }

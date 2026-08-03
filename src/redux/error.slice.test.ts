@@ -1,7 +1,17 @@
-import {describe, expect} from "vitest";
+import {describe, expect, vi} from "vitest";
 import {test} from "@vitest/runner";
 import errorSlice, {type ErrorState, handleError, hideError, showError} from "./error.slice.ts";
 import {AxiosError, type AxiosResponseHeaders} from "axios";
+
+vi.mock('i18next', async (importOriginal) => {
+
+    const actual = await importOriginal<typeof import('i18next')>();
+
+    return {
+        ...actual,
+        t: vi.fn((key) => key),
+    }
+});
 
 const initialState: ErrorState = {
     title: '',

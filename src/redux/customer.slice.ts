@@ -5,7 +5,7 @@ import type {Customer} from "../types/people";
 
 const EMPTY_CUST: Customer = {
     city: "", companyName: "",contactPersonFirstName: "", contactPersonLastName: "", sector: "Tech",
-    email: "", phone: "", startDate: moment().valueOf(), status: "Prospect",
+    email: "", hiringRatePerHour: 50, phone: "", startDate: moment().valueOf(), status: "Prospect",
 };
 export type CustomerState = {
     customers: Customer[]

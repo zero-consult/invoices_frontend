@@ -1,6 +1,17 @@
 import type {Customer, Employee} from "../types/people";
 import moment from "moment";
 import type {TimesheetEntry} from "../types/timesheet";
+import type {Payslip} from "../types/invoices";
+
+export const PAY_1: Payslip = {
+    allowances: [{id: "1", amount: 100, label: "Meal vouchers"}],
+    employeeId: "1",
+    grossSalary: 3000,
+    id: "1",
+    month: "2026-06-01",
+    taxRate: 37.5
+
+}
 
 export const TS_ENTRY_1: TimesheetEntry = {
     id: "1",
@@ -10,6 +21,7 @@ export const TS_ENTRY_1: TimesheetEntry = {
     customerId: "1",
     employeeId: "1",
     status: "In progress",
+    type: "Work",
     createdAt: moment().valueOf(),
     description: "description"
 }
@@ -21,6 +33,7 @@ export const EMP_1: Employee = {
     functionTitle: "Software Engineer",
     department: "Engineering",
     email: "",
+    grossWage: 3000,
     phone: "1234567890",
     startDate: moment("2026-07-20", "YYYY-MM-DD").valueOf(),
     status: "Active",
@@ -34,6 +47,7 @@ export const CUST_1: Customer = {
     contactPersonFirstName: "Jane",
     contactPersonLastName: "Doe",
     email: "",
+    hiringRatePerHour: 50,
     phone: "0987654321",
     startDate: moment("2026-07-20", "YYYY-MM-DD").valueOf(),
     status: "Active",

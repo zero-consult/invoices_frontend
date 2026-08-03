@@ -10,6 +10,7 @@ import CollapsedMenu from "./components/CollapsedMenu.tsx";
 import FullMenu from "./components/FullMenu.tsx";
 import Invoicelist from "./pages/Invoicelist.tsx";
 import Paysliplist from "./pages/Payslipslist.tsx";
+import GeneratePayslip from "./pages/GeneratePayslip.tsx";
 
 function App() {
     const [collapsed, setCollapsed] = useState(false);
@@ -32,6 +33,7 @@ function App() {
                             <Route path="/" element={<Invoicelist/>}/>
                             <Route path="/invoices" element={<Invoicelist/>}/>
                             <Route path="/payslips" element={<Paysliplist/>}/>
+                            <Route path="/payslips/generate" element={<GeneratePayslip/>}/>
                         </Routes>
                     </main>
                 </div>

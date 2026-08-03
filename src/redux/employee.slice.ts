@@ -5,7 +5,7 @@ import moment from "moment";
 
 const EMPTY_EMP: Employee = {
     firstName: "", lastName: "", functionTitle: "", department: "Engineering",
-    email: "", phone: "", startDate: moment().valueOf(), status: "Active", manager: undefined,
+    email: "", grossWage: 3000, phone: "", startDate: moment().valueOf(), status: "Active", manager: undefined,
 };
 export type EmployeeState = {
     employees: Employee[]

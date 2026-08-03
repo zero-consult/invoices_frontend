@@ -1,6 +1,7 @@
 import {createSlice, type PayloadAction} from "@reduxjs/toolkit";
 import type {RootState} from "./store.ts";
 import {AxiosError} from "axios";
+import {t} from "i18next";
 
 export type ErrorState = {
     title: string,
@@ -22,7 +23,7 @@ const errorSlice = createSlice({
             state.title = "Error";
             if (action.payload instanceof AxiosError) {
                 if (typeof action.payload.response?.data === "string") {
-                    state.message = action.payload.response?.data;
+                    state.message = t(action.payload.response?.data);
                 } else if (action.payload.code === "ERR_NETWORK") {
                     state.message = "Network error";
                 } else if (action.payload.code === "ERR_BAD_REQUEST") {
