@@ -97,11 +97,11 @@ function GeneratePayslip() {
                 className="block text-xs font-medium text-muted-foreground mb-1.5 uppercase tracking-wide">{t('generate_payslip.labels.month')}</label>
             <input type="month"
                    className="w-full bg-input-background text-foreground text-sm rounded-md px-3 py-2 border border-border focus:outline-none focus:ring-1 focus:ring-ring"
-                   min={moment(payslipMonth, "yyyy-MM-dd").format("yyyy-MM")}
-                   value={moment(selectedPayslip.month, "yyyy-MM-dd").format("yyyy-MM")}
+                   min={moment(payslipMonth, "YYYY-MM-DD").format("YYYY-MM")}
+                   value={moment(selectedPayslip.month, "YYYY-MM-DD").format("YYYY-MM")}
                    onChange={e => dispatch(loadSinglePayslip({
                        ...selectedPayslip,
-                       month: moment(e.target.value, "yyyy-MM").format("yyyy-MM-dd")
+                       month: moment(e.target.value, "yyyy-MM").format("yyyy-MM-DD")
                    }))}/>
         </div>
         <div className="col-span-2">
