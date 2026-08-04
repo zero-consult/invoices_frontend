@@ -35,6 +35,9 @@ function GeneratePayslip() {
         try {
             const employeeListResponse = await employeeList(axios);
             dispatch(loadEmployees(employeeListResponse.data));
+            if(employeeListResponse.data.length > 0) {
+                dispatch(loadSinglePayslip({...selectedPayslip, employeeId: employeeListResponse.data[0].id!}))
+            }
         } catch (error) {
             dispatch(handleError(error))
         }
