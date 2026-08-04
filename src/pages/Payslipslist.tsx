@@ -204,7 +204,7 @@ function Paysliplist() {
                 <div key={label} className="bg-card rounded-lg px-5 py-4 border border-border">
                     <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1"
                        style={{fontFamily: "'DM Mono', monospace"}}>{label}</p>
-                    <p className="text-xl font-semibold text-foreground"
+                    <p className="text-2xl font-semibold text-foreground"
                        style={{fontFamily: "'Instrument Sans', sans-serif"}}>{value}</p>
                     <p className="text-xs text-muted-foreground mt-0.5">{sub}</p>
                 </div>
