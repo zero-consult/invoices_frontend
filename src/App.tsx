@@ -11,6 +11,7 @@ import FullMenu from "./components/FullMenu.tsx";
 import Invoicelist from "./pages/Invoicelist.tsx";
 import Paysliplist from "./pages/Payslipslist.tsx";
 import GeneratePayslip from "./pages/GeneratePayslip.tsx";
+import GenerateInvoice from "./pages/GenerateInvoice.tsx";
 
 function App() {
     const [collapsed, setCollapsed] = useState(false);
@@ -32,6 +33,8 @@ function App() {
                         <Routes>
                             <Route path="/" element={<Invoicelist/>}/>
                             <Route path="/invoices" element={<Invoicelist/>}/>
+                            <Route path="/invoices/generate" element={<GenerateInvoice/>}/>
+                            <Route path="/invoices/:invoiceId/edit" element={<GenerateInvoice/>}/>
                             <Route path="/payslips" element={<Paysliplist/>}/>
                             <Route path="/payslips/generate" element={<GeneratePayslip/>}/>
                         </Routes>

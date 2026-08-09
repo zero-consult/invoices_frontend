@@ -23,14 +23,14 @@ const invoicingMonthSlice = createSlice({
     selectors: {
         selectInvoicingMonth: state => state.invoicingMonth,
         selectPayslipMonth: state => state.payslipMonth,
-        selectPayslipFormatted: state => moment(state.payslipMonth, "YYYY-MM-DD")
+        selectPayslipMonthFormatted: state => moment(state.payslipMonth, "YYYY-MM-DD")
     }
 })
 
 export const {setInvoicingMonth, setPayslipMonth} = invoicingMonthSlice.actions
 
 export const {
-    selectInvoicingMonth, selectPayslipMonth, selectPayslipFormatted
+    selectInvoicingMonth, selectPayslipMonth, selectPayslipMonthFormatted
 } = invoicingMonthSlice.getSelectors((rootState: RootState) => rootState.invoicingMonth)
 
 export default invoicingMonthSlice

@@ -14,7 +14,14 @@
 
 
 
-export * from './api/invoice-api';
-export * from './api/invoicing-month-api';
-export * from './api/payslip-api';
+
+export const InvoiceStatus = {
+    Concept: 'Concept',
+    Sent: 'Sent',
+    Paid: 'Paid',
+} as const;
+
+export type InvoiceStatus = typeof InvoiceStatus[keyof typeof InvoiceStatus];
+
+
 

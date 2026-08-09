@@ -13,7 +13,7 @@ import {Configuration, EmployeeApiFp} from "../types/people";
 import {INVOICES_BACKEND_HOST, PEOPLE_BACKEND_HOST} from "../Constants.ts";
 import axios from "axios";
 import {handleError} from "../redux/error.slice.ts";
-import {selectPayslipFormatted, setPayslipMonth} from "../redux/invoicingMonth.slice.ts";
+import {selectPayslipMonthFormatted, setPayslipMonth} from "../redux/invoicingMonth.slice.ts";
 import {calculateNetSalary, formatCurrency} from "../utils/SalaryUtils.ts";
 
 const INITIALS_COLORS = [
@@ -33,7 +33,7 @@ function getAvatarColor(name: string) {
 function Paysliplist() {
     const {t, i18n} = useTranslation();
     const dispatch = useDispatch();
-    const payslipMonthFormatted = useSelector(selectPayslipFormatted);
+    const payslipMonthFormatted = useSelector(selectPayslipMonthFormatted);
     const [monthOffset, setMonthOffset] = useState(-1);
     const payslips = useSelector(selectPayslips);
     const employees = useSelector(selectEmployees);
@@ -61,6 +61,17 @@ function Paysliplist() {
         try {
             const payslipsListResponse = await payslipsList(axios);
             dispatch(loadPayslips(payslipsListResponse.data));
+            let requiresRefresh = false;
+            for(const payslip of payslipsListResponse.data) {
+                if(!payslip.payslipFile) {
+                    requiresRefresh = true;
+                }
+            }
+            if(requiresRefresh) {
+                setTimeout(() => {
+                    fetchPayslips();
+                }, 60 * 1000)
+            }
         } catch (error) {
             dispatch(handleError(error))
         }
@@ -119,7 +130,7 @@ function Paysliplist() {
     const monthEnd = moment(monthStart).add(1, "month").subtract(1, "day");
     const monthLabel = `${monthStart.locale(i18n.resolvedLanguage || "en").format("D MMM")} – ${monthEnd.locale(i18n.resolvedLanguage || "en").format("D MMM YYYY")}`;
 
-    const totalBrutoThisMonth = payslips.reduce((s, p) => s + p.grossSalary, 0);
+    const totalGrossThisMonth = payslips.reduce((s, p) => s + p.grossSalary, 0);
     const totalNetThisMonth = payslips.reduce((s, p) => s + calculateNetSalary(p), 0);
 
     async function downloadPayslipFile(ps: Payslip) {
@@ -198,7 +209,7 @@ function Paysliplist() {
         <div className="px-8 py-5 grid grid-cols-3 gap-4 border-b border-border">
             {[
                 {label: t('payslipslist.card.total'), value: payslips.length, sub: t('menu.payslips')},
-                {label: t('payslipslist.card.gross_total'), value: formatCurrency(totalBrutoThisMonth), sub: ""},
+                {label: t('payslipslist.card.gross_total'), value: formatCurrency(totalGrossThisMonth), sub: ""},
                 {label: t('payslipslist.card.net_total'), value: formatCurrency(totalNetThisMonth), sub: ""},
             ].map(({label, value, sub}) => (
                 <div key={label} className="bg-card rounded-lg px-5 py-4 border border-border">

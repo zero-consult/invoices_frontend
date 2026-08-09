@@ -24,6 +24,7 @@ dist-ssr
 *.sw?
 
 # IDL generated types
+src/types/invoices/
 src/types/people/
 src/types/timesheet/
 

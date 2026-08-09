@@ -23,7 +23,10 @@ function CollapsedMemu(props: CollapsedMemuProps) {
                 <Routes>
                     <Route path="/" element={<NavigationList compact={true} active="invoices"/>}/>
                     <Route path="/invoices" element={<NavigationList compact={true} active="invoices"/>}/>
+                    <Route path="/invoices/generate" element={<NavigationList compact={true} active="invoices"/>}/>
+                    <Route path="/invoices/:invoiceId/edit" element={<NavigationList compact={true} active="invoices"/>}/>
                     <Route path="/payslips" element={<NavigationList compact={true} active="payslips"/>}/>
+                    <Route path="/payslips/generate" element={<NavigationList compact={true} active="payslips"/>}/>
                 </Routes>
             </nav>
 

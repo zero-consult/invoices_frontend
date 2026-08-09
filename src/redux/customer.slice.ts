@@ -8,12 +8,14 @@ const EMPTY_CUST: Customer = {
     email: "", hiringRatePerHour: 50, phone: "", startDate: moment().valueOf(), status: "Prospect",
 };
 export type CustomerState = {
-    customers: Customer[]
+    customers: Customer[],
+    customerIds: string[],
     selectedCustomer: Customer
 }
 
 const initialState: CustomerState = {
     customers: [],
+    customerIds: [],
     selectedCustomer: EMPTY_CUST
 }
 
@@ -25,6 +27,9 @@ const customerSlice = createSlice({
         loadCustomers: (state, action: PayloadAction<Customer[]>) => {
             state.customers = action.payload
         },
+        loadCustomerIds: (state, action: PayloadAction<string[]>) => {
+            state.customerIds = action.payload;
+        },
         loadSingleCustomer: (state, action: PayloadAction<Customer>) => {
             state.selectedCustomer = action.payload
         },
@@ -34,14 +39,16 @@ const customerSlice = createSlice({
     },
     selectors: {
         selectCustomers: state => state.customers,
+        selectCustomerIds: state => state.customerIds,
         selectSelectedCustomer: state => state.selectedCustomer,
     }
 })
 
-export const {loadCustomers, loadSingleCustomer, resetSingleCustomer} = customerSlice.actions
+export const {loadCustomers, loadCustomerIds, loadSingleCustomer, resetSingleCustomer} = customerSlice.actions
 
 export const {
     selectCustomers,
+    selectCustomerIds,
     selectSelectedCustomer
 } = customerSlice.getSelectors((rootState: RootState) => rootState.customer)
 

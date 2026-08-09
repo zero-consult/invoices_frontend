@@ -10,7 +10,6 @@ All URIs are relative to *http://localhost*
 |[**getPayslipFile**](#getpayslipfile) | **GET** /payslips/{id}/file | Get the payslip file|
 |[**getPayslipMonth**](#getpayslipmonth) | **GET** /payslips/month | Get the current payslip month|
 |[**payslipsList**](#payslipslist) | **GET** /payslips | Get the list of payslips for a given period|
-|[**updatePayslip**](#updatepayslip) | **PUT** /payslips/{id} | Update a payslip|
 
 # **deletePayslip**
 > deletePayslip()
@@ -311,63 +310,7 @@ No authorization required
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | A list of timesheet entries |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **updatePayslip**
-> Payslip updatePayslip(payslip)
-
-
-### Example
-
-```typescript
-import {
-    PayslipApi,
-    Configuration,
-    Payslip
-} from './api';
-
-const configuration = new Configuration();
-const apiInstance = new PayslipApi(configuration);
-
-let id: string; // (default to undefined)
-let payslip: Payslip; //
-
-const { status, data } = await apiInstance.updatePayslip(
-    id,
-    payslip
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **payslip** | **Payslip**|  | |
-| **id** | [**string**] |  | defaults to undefined|
-
-
-### Return type
-
-**Payslip**
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json, text/plain
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Payslip updated |  -  |
-|**404** | Entity not found |  -  |
-|**406** | Month of payslip is already closed |  -  |
+|**200** | A list of payslips |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

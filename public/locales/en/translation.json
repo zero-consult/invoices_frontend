@@ -11,6 +11,58 @@
     "personnel": "Personnel",
     "timesheets": "Timesheets"
   },
+  "invoicelist": {
+    "cards": {
+      "invoices": "invoices",
+      "outstanding": "Outstanding",
+      "overdue": "Overdue",
+      "paid": "paid",
+      "received": "Received",
+      "to_receive": "to receive",
+      "too_late": "too late",
+      "total": "Total"
+    },
+    "search": {
+      "placeholder": "Search invoicenumber, customer, ..."
+    },
+    "status": {
+      "all": "All",
+      "concept": "Concept",
+      "paid": "Paid",
+      "sent": "Sent"
+    },
+    "table": {
+      "empty": "No invoices found.",
+      "headers": {
+        "actions": "Actions",
+        "amount": "Amount",
+        "number": "Number",
+        "customer": "Customer",
+        "date": "Date",
+        "expiration_date": "Expiration date",
+        "status": "Status"
+      }
+    },
+    "generate": "Generate invoice",
+    "today": "Today"
+  },
+  "generate_invoice": {
+    "hiring_rate_per_hour": "Hiring rate per hour",
+    "hours": "Hours",
+    "labels": {
+      "customer": "Customer",
+      "invoice_date": "Invoice date",
+      "invoice_until": "Invoice until",
+      "expiration_date": "Expiration date",
+      "status": "Status"
+    },
+    "notes": "Notes",
+    "optional_remarks": "Optional remarks",
+    "save": "Save",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "vat": "Vat {{percent}}%"
+  },
   "generate_payslip": {
     "add_allowance": "Add allowance",
     "labels": {

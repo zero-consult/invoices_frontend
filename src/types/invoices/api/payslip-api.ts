@@ -247,45 +247,6 @@ export const PayslipApiAxiosParamCreator = function (configuration?: Configurati
                 options: localVarRequestOptions,
             };
         },
-        /**
-         * 
-         * @summary Update a payslip
-         * @param {string} id 
-         * @param {Payslip} payslip 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        updatePayslip: async (id: string, payslip: Payslip, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('updatePayslip', 'id', id)
-            // verify required parameter 'payslip' is not null or undefined
-            assertParamExists('updatePayslip', 'payslip', payslip)
-            const localVarPath = `/payslips/{id}`
-                .replace('{id}', encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-            localVarHeaderParameter['Accept'] = 'application/json,text/plain';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(payslip, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
     }
 };
 
@@ -374,20 +335,6 @@ export const PayslipApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['PayslipApi.payslipsList']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
-        /**
-         * 
-         * @summary Update a payslip
-         * @param {string} id 
-         * @param {Payslip} payslip 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async updatePayslip(id: string, payslip: Payslip, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Payslip>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updatePayslip(id, payslip, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PayslipApi.updatePayslip']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
     }
 };
 
@@ -457,17 +404,6 @@ export const PayslipApiFactory = function (configuration?: Configuration, basePa
          */
         payslipsList(from: string, until: string, employeeId?: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<Payslip>> {
             return localVarFp.payslipsList(from, until, employeeId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Update a payslip
-         * @param {string} id 
-         * @param {Payslip} payslip 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        updatePayslip(id: string, payslip: Payslip, options?: RawAxiosRequestConfig): AxiosPromise<Payslip> {
-            return localVarFp.updatePayslip(id, payslip, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -541,18 +477,6 @@ export class PayslipApi extends BaseAPI {
      */
     public payslipsList(from: string, until: string, employeeId?: string, options?: RawAxiosRequestConfig) {
         return PayslipApiFp(this.configuration).payslipsList(from, until, employeeId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Update a payslip
-     * @param {string} id 
-     * @param {Payslip} payslip 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public updatePayslip(id: string, payslip: Payslip, options?: RawAxiosRequestConfig) {
-        return PayslipApiFp(this.configuration).updatePayslip(id, payslip, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

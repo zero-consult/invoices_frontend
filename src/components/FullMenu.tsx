@@ -35,6 +35,8 @@ function FullMenu(props: FullMenuProps) {
                 <Routes>
                     <Route path="/" element={<NavigationList compact={false} active="invoices"/>}/>
                     <Route path="/invoices" element={<NavigationList compact={false} active="invoices"/>}/>
+                    <Route path="/invoices/generate" element={<NavigationList compact={false} active="invoices"/>}/>
+                    <Route path="/invoices/:invoiceId/edit" element={<NavigationList compact={false} active="invoices"/>}/>
                     <Route path="/payslips" element={<NavigationList compact={false} active="payslips"/>}/>
                     <Route path="/payslips/generate" element={<NavigationList compact={false} active="payslips"/>}/>
                 </Routes>

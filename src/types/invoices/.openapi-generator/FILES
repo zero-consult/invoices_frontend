@@ -1,12 +1,16 @@
 .gitignore
 .npmignore
 api.ts
+api/invoice-api.ts
 api/invoicing-month-api.ts
 api/payslip-api.ts
 base.ts
 common.ts
 configuration.ts
 docs/Allowance.md
+docs/Invoice.md
+docs/InvoiceApi.md
+docs/InvoiceStatus.md
 docs/InvoicingMonthApi.md
 docs/Payslip.md
 docs/PayslipApi.md
@@ -14,4 +18,6 @@ git_push.sh
 index.ts
 model/allowance.ts
 model/index.ts
+model/invoice-status.ts
+model/invoice.ts
 model/payslip.ts
