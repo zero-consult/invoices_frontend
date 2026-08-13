@@ -22,7 +22,7 @@ const PERSONNEL_NAV: LinkProps[] = [
     },
     {
         name: "payslips",
-        url: "/payslips",
+        url: "/invoices/payslips",
         icon: FileText,
         label: "menu.payslips",
     }
@@ -37,7 +37,7 @@ const FINANCIAL_NAV: LinkProps[] = [
     },
     {
         name: "invoices",
-        url: "/invoices",
+        url: "/invoices/invoices",
         icon: Receipt,
         label: "menu.invoices",
     }

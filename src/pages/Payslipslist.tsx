@@ -195,7 +195,7 @@ function Paysliplist() {
                         <Plus className="w-4 h-4"/> {t('payslipslist.generate')}
                     </button>
                     :
-                    <Link to={"/payslips/generate"}
+                    <Link to={"/invoices/payslips/generate"}
                           onClick={(event => event.stopPropagation())}
                           className={"flex items-center gap-2 px-4 py-2.5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors "}>
                         <Plus className="w-4 h-4"/> {t('payslipslist.generate')}

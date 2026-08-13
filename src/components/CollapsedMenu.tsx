@@ -33,11 +33,12 @@ function CollapsedMemu(props: CollapsedMemuProps) {
             <nav className="flex-1 px-2 py-4 space-y-0.5">
                 <Routes>
                     <Route path="/" element={<NavigationList compact={true} active="invoices"/>}/>
-                    <Route path="/invoices" element={<NavigationList compact={true} active="invoices"/>}/>
-                    <Route path="/invoices/generate" element={<NavigationList compact={true} active="invoices"/>}/>
-                    <Route path="/invoices/:invoiceId/edit" element={<NavigationList compact={true} active="invoices"/>}/>
-                    <Route path="/payslips" element={<NavigationList compact={true} active="payslips"/>}/>
-                    <Route path="/payslips/generate" element={<NavigationList compact={true} active="payslips"/>}/>
+                    <Route path="/invoices/" element={<NavigationList compact={true} active="invoices"/>}/>
+                    <Route path="/invoices/invoices" element={<NavigationList compact={true} active="invoices"/>}/>
+                    <Route path="/invoices/invoices/generate" element={<NavigationList compact={true} active="invoices"/>}/>
+                    <Route path="/invoices/invoices/:invoiceId/edit" element={<NavigationList compact={true} active="invoices"/>}/>
+                    <Route path="/invoices/payslips" element={<NavigationList compact={true} active="payslips"/>}/>
+                    <Route path="/invoices/payslips/generate" element={<NavigationList compact={true} active="payslips"/>}/>
                 </Routes>
             </nav>
 

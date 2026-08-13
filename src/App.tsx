@@ -41,12 +41,12 @@ function App() {
                             className={"flex-1 flex flex-col min-w-0 bg-background overflow-y-auto" + (collapsed ? " pl-15" : " pl-60")}>
                             {/* Routes */}
                             <Routes>
-                                <Route path="/" element={<Invoicelist/>}/>
-                                <Route path="/invoices" element={<Invoicelist/>}/>
-                                <Route path="/invoices/generate" element={<GenerateInvoice/>}/>
-                                <Route path="/invoices/:invoiceId/edit" element={<GenerateInvoice/>}/>
-                                <Route path="/payslips" element={<Paysliplist/>}/>
-                                <Route path="/payslips/generate" element={<GeneratePayslip/>}/>
+                                <Route path="/invoices/" element={<Invoicelist/>}/>
+                                <Route path="/invoices/invoices" element={<Invoicelist/>}/>
+                                <Route path="/invoices/invoices/generate" element={<GenerateInvoice/>}/>
+                                <Route path="/invoices/invoices/:invoiceId/edit" element={<GenerateInvoice/>}/>
+                                <Route path="/invoices/payslips" element={<Paysliplist/>}/>
+                                <Route path="/invoices/payslips/generate" element={<GeneratePayslip/>}/>
                             </Routes>
                         </main>
                     </div>

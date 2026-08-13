@@ -147,7 +147,7 @@ function GenerateInvoice() {
             const editInvoice = await InvoiceApiFp(new Configuration({accessToken: token, basePath: INVOICES_BACKEND_HOST})).editInvoice(invoice.id, invoice);
             try {
                 await editInvoice(axios);
-                window.location.href = "/invoices"
+                window.location.href = "/invoices/invoices"
             } catch (error) {
                 dispatch(handleError(error));
             }
@@ -155,7 +155,7 @@ function GenerateInvoice() {
             const generateInvoice = await InvoiceApiFp(new Configuration({accessToken: token, basePath: INVOICES_BACKEND_HOST})).generateInvoice(invoice);
             try {
                 await generateInvoice(axios);
-                window.location.href = "/invoices"
+                window.location.href = "/invoices/invoices"
             } catch (error) {
                 dispatch(handleError(error));
             }

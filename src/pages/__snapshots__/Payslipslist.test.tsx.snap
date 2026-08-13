@@ -47,7 +47,7 @@ exports[`delete payslip 1`] = `
           <a
             class="flex items-center gap-2 px-4 py-2.5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors "
             data-discover="true"
-            href="/payslips/generate"
+            href="/invoices/payslips/generate"
           >
             <svg
               aria-hidden="true"
@@ -470,7 +470,7 @@ exports[`delete payslip 1`] = `
         <a
           class="flex items-center gap-2 px-4 py-2.5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors "
           data-discover="true"
-          href="/payslips/generate"
+          href="/invoices/payslips/generate"
         >
           <svg
             aria-hidden="true"
@@ -950,7 +950,7 @@ exports[`renders empty payslip list 1`] = `
           <a
             class="flex items-center gap-2 px-4 py-2.5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors "
             data-discover="true"
-            href="/payslips/generate"
+            href="/invoices/payslips/generate"
           >
             <svg
               aria-hidden="true"
@@ -1271,7 +1271,7 @@ exports[`renders empty payslip list 1`] = `
         <a
           class="flex items-center gap-2 px-4 py-2.5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors "
           data-discover="true"
-          href="/payslips/generate"
+          href="/invoices/payslips/generate"
         >
           <svg
             aria-hidden="true"
@@ -1649,7 +1649,7 @@ exports[`renders payslip list 1`] = `
           <a
             class="flex items-center gap-2 px-4 py-2.5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors "
             data-discover="true"
-            href="/payslips/generate"
+            href="/invoices/payslips/generate"
           >
             <svg
               aria-hidden="true"
@@ -2072,7 +2072,7 @@ exports[`renders payslip list 1`] = `
         <a
           class="flex items-center gap-2 px-4 py-2.5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors "
           data-discover="true"
-          href="/payslips/generate"
+          href="/invoices/payslips/generate"
         >
           <svg
             aria-hidden="true"
@@ -2552,7 +2552,7 @@ exports[`sort on employee 1`] = `
           <a
             class="flex items-center gap-2 px-4 py-2.5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors "
             data-discover="true"
-            href="/payslips/generate"
+            href="/invoices/payslips/generate"
           >
             <svg
               aria-hidden="true"
@@ -3085,7 +3085,7 @@ exports[`sort on employee 1`] = `
         <a
           class="flex items-center gap-2 px-4 py-2.5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors "
           data-discover="true"
-          href="/payslips/generate"
+          href="/invoices/payslips/generate"
         >
           <svg
             aria-hidden="true"
@@ -3675,7 +3675,7 @@ exports[`sort on employee 2`] = `
           <a
             class="flex items-center gap-2 px-4 py-2.5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors "
             data-discover="true"
-            href="/payslips/generate"
+            href="/invoices/payslips/generate"
           >
             <svg
               aria-hidden="true"
@@ -4208,7 +4208,7 @@ exports[`sort on employee 2`] = `
         <a
           class="flex items-center gap-2 px-4 py-2.5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors "
           data-discover="true"
-          href="/payslips/generate"
+          href="/invoices/payslips/generate"
         >
           <svg
             aria-hidden="true"

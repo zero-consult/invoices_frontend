@@ -3,6 +3,9 @@ import {ArrowLeftToLine, Building2, LogOut} from "lucide-react";
 import {Route, Routes} from "react-router";
 import NavigationList from "./NavigationList.tsx";
 import LanguageSwitcher from "./LanguageSwitcher.tsx";
+import {useDispatch, useSelector} from "react-redux";
+import {logout, selectAdmin, selectUser} from "../redux/account.slice.ts";
+import {getInitials} from "../utils/NameUtils.ts";
 
 export type FullMenuProps = {
     shrink: () => void;
@@ -10,6 +13,14 @@ export type FullMenuProps = {
 
 function FullMenu(props: FullMenuProps) {
     const {t} = useTranslation();
+    const dispatch = useDispatch();
+    const user = useSelector(selectUser);
+    const admin = useSelector(selectAdmin);
+
+    function doLogout() {
+        dispatch(logout());
+        window.location.href = import.meta.env.VITE_PEOPLE_FRONTEND_URL;
+    }
 
     return <>
         {/* Sidebar */}
@@ -34,11 +45,12 @@ function FullMenu(props: FullMenuProps) {
             <nav className="flex-1 px-2 py-4 space-y-0.5">
                 <Routes>
                     <Route path="/" element={<NavigationList compact={false} active="invoices"/>}/>
-                    <Route path="/invoices" element={<NavigationList compact={false} active="invoices"/>}/>
-                    <Route path="/invoices/generate" element={<NavigationList compact={false} active="invoices"/>}/>
-                    <Route path="/invoices/:invoiceId/edit" element={<NavigationList compact={false} active="invoices"/>}/>
-                    <Route path="/payslips" element={<NavigationList compact={false} active="payslips"/>}/>
-                    <Route path="/payslips/generate" element={<NavigationList compact={false} active="payslips"/>}/>
+                    <Route path="/invoices/" element={<NavigationList compact={false} active="invoices"/>}/>
+                    <Route path="/invoices/invoices" element={<NavigationList compact={false} active="invoices"/>}/>
+                    <Route path="/invoices/invoices/generate" element={<NavigationList compact={false} active="invoices"/>}/>
+                    <Route path="/invoices/invoices/:invoiceId/edit" element={<NavigationList compact={false} active="invoices"/>}/>
+                    <Route path="/invoices/payslips" element={<NavigationList compact={false} active="payslips"/>}/>
+                    <Route path="/invoices/payslips/generate" element={<NavigationList compact={false} active="payslips"/>}/>
                 </Routes>
             </nav>
 
@@ -46,15 +58,15 @@ function FullMenu(props: FullMenuProps) {
                 <div className="px-3 py-4 border-t border-sidebar-border">
                     <div className="flex h-10 items-center gap-3 px-1 py-2.5 mb-1">
                         <div
-                            className="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center text-xs font-semibold text-primary">JD
+                            className="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center text-xs font-semibold text-primary">{getInitials(user!.firstName + " " + user!.lastName)}
                         </div>
                         <div className="flex-1 min-w-0">
-                            <p className="text-xs font-medium text-sidebar-foreground truncate">Jan de
-                                Groot</p>
-                            <p className="text-xs text-sidebar-foreground/40 truncate">Admin</p>
+                            <p className="text-xs font-medium text-sidebar-foreground truncate">{user!.firstName + " " + user!.lastName}</p>
+                            <p className="text-xs text-sidebar-foreground/40 truncate">{admin? t('role.admin') : t('role.employee')}</p>
                         </div>
                     </div>
                     <button
+                        onClick={() => doLogout()}
                         className="w-full h-10 flex items-center gap-3 px-2 py-2 rounded-md text-sm text-sidebar-foreground/40 hover:text-sidebar-foreground hover:bg-sidebar-accent transition-colors">
                         <LogOut className="w-4 h-4"/> {t('menu.logout')}
                     </button>

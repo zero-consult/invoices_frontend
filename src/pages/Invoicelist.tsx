@@ -158,7 +158,7 @@ function Invoicelist() {
                             className="px-2.5 py-1 rounded text-sm text-muted-foreground hover:text-foreground hover:bg-card transition-colors">›
                     </button>
                 </div>
-                <Link to={"/invoices/generate"}
+                <Link to={"/invoices/invoices/generate"}
                       className={"flex items-center gap-2 px-4 py-2.5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors "}>
                     <Plus className="w-4 h-4"/> {t("invoicelist.generate")}
                 </Link>
@@ -297,7 +297,7 @@ function Invoicelist() {
                                                 <LoaderCircle className={"w-3.5 h-3.5 animate-spin"}/></div>
                                     }
                                     {inv.status != "Paid" ?
-                                        <Link to={"/invoices/" + inv.id + "/edit"}
+                                        <Link to={"/invoices/invoices/" + inv.id + "/edit"}
                                               className="p-1.5 rounded-md hover:bg-primary/15 hover:text-primary text-muted-foreground transition-colors">
                                             <Pencil className="w-3.5 h-3.5"/>
                                         </Link>

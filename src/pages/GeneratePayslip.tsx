@@ -77,7 +77,7 @@ function GeneratePayslip() {
         const generatePayslip = await PayslipApiFp(new Configuration({accessToken: token, basePath: INVOICES_BACKEND_HOST})).generatePayslip(selectedPayslip);
         try {
             await generatePayslip(axios);
-            window.location.href = "/payslips";
+            window.location.href = "/invoices/payslips";
         } catch (error) {
             dispatch(handleError(error))
         }
