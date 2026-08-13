@@ -106,6 +106,10 @@
       "download": "Download"
     }
   },
+  "role": {
+    "admin": "Administrator",
+    "employee": "Employee"
+  },
   "server": {
     "error": {
       "aproved_entries_without_payslip": "There are approved timesheet entries without a payslip for the current month",

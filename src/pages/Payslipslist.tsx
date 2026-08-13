@@ -15,15 +15,13 @@ import axios from "axios";
 import {handleError} from "../redux/error.slice.ts";
 import {selectPayslipMonthFormatted, setPayslipMonth} from "../redux/invoicingMonth.slice.ts";
 import {calculateNetSalary, formatCurrency} from "../utils/SalaryUtils.ts";
+import {selectToken} from "../redux/account.slice.ts";
+import {getInitials} from "../utils/NameUtils.ts";
 
 const INITIALS_COLORS = [
     "bg-blue-600", "bg-violet-600", "bg-rose-600",
     "bg-amber-600", "bg-teal-600", "bg-indigo-600",
 ];
-
-function getInitials(name: string) {
-    return name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2);
-}
 
 function getAvatarColor(name: string) {
     return INITIALS_COLORS[name.charCodeAt(0) % INITIALS_COLORS.length];
@@ -33,6 +31,7 @@ function getAvatarColor(name: string) {
 function Paysliplist() {
     const {t, i18n} = useTranslation();
     const dispatch = useDispatch();
+    const token = useSelector(selectToken);
     const payslipMonthFormatted = useSelector(selectPayslipMonthFormatted);
     const [monthOffset, setMonthOffset] = useState(-1);
     const payslips = useSelector(selectPayslips);
@@ -43,7 +42,7 @@ function Paysliplist() {
     const [currentPage, setCurrentPage] = useState(1);
 
     async function fetchEmployees() {
-        const employeeList = await EmployeeApiFp(new Configuration({basePath: PEOPLE_BACKEND_HOST})).employeesList();
+        const employeeList = await EmployeeApiFp(new Configuration({accessToken: token, basePath: PEOPLE_BACKEND_HOST})).employeesList();
         try {
             const employeeListResponse = await employeeList(axios);
             dispatch(loadEmployees(employeeListResponse.data));
@@ -57,7 +56,7 @@ function Paysliplist() {
         const day = parseInt(moment(monthStart).format("D"));
         monthStart.subtract(day - 1, "days");
         const monthEnd = moment(monthStart).add(1, "month").subtract(1, "day")
-        const payslipsList = await PayslipApiFp(new Configuration({basePath: INVOICES_BACKEND_HOST})).payslipsList(monthStart.format("YYYY-MM-DD"), monthEnd.format("YYYY-MM-DD"));
+        const payslipsList = await PayslipApiFp(new Configuration({accessToken: token, basePath: INVOICES_BACKEND_HOST})).payslipsList(monthStart.format("YYYY-MM-DD"), monthEnd.format("YYYY-MM-DD"));
         try {
             const payslipsListResponse = await payslipsList(axios);
             dispatch(loadPayslips(payslipsListResponse.data));
@@ -78,7 +77,7 @@ function Paysliplist() {
     }
 
     async function fetchPayslipMonth() {
-        const payslipMonth = await InvoicingMonthApiFp(new Configuration({basePath: INVOICES_BACKEND_HOST})).getCurrentPayslipMonth();
+        const payslipMonth = await InvoicingMonthApiFp(new Configuration({accessToken: token, basePath: INVOICES_BACKEND_HOST})).getCurrentPayslipMonth();
         try {
             const payslipMonthResponse = await payslipMonth(axios);
             dispatch(setPayslipMonth(payslipMonthResponse.data));
@@ -139,7 +138,7 @@ function Paysliplist() {
 
     async function deletePayslip(ps: Payslip) {
         if(ps.id) {
-            const deletePayslip = await PayslipApiFp(new Configuration({basePath: INVOICES_BACKEND_HOST})).deletePayslip(ps.id);
+            const deletePayslip = await PayslipApiFp(new Configuration({accessToken: token, basePath: INVOICES_BACKEND_HOST})).deletePayslip(ps.id);
             try {
                 await deletePayslip(axios);
                 fetchPayslips()
@@ -150,7 +149,7 @@ function Paysliplist() {
     }
 
     async function closePayslipMonth() {
-        const closePayslipMonth = await InvoicingMonthApiFp(new Configuration({basePath: INVOICES_BACKEND_HOST})).closeCurrentPayslipMonth();
+        const closePayslipMonth = await InvoicingMonthApiFp(new Configuration({accessToken: token, basePath: INVOICES_BACKEND_HOST})).closeCurrentPayslipMonth();
         try {
             const closePayslipMonthResponse = await closePayslipMonth(axios);
             dispatch(setPayslipMonth(closePayslipMonthResponse.data))

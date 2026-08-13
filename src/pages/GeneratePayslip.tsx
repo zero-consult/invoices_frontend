@@ -12,10 +12,12 @@ import {handleError} from "../redux/error.slice.ts";
 import {InvoicingMonthApiFp, PayslipApiFp} from "../types/invoices";
 import {selectPayslipMonth, setPayslipMonth} from "../redux/invoicingMonth.slice.ts";
 import moment from "moment";
+import {selectToken} from "../redux/account.slice.ts";
 
 function GeneratePayslip() {
     const {t} = useTranslation();
     const dispatch = useDispatch();
+    const token = useSelector(selectToken);
     const payslipMonth = useSelector(selectPayslipMonth);
     const employees = useSelector(selectEmployees);
     const selectedPayslip = useSelector(selectSelectedPayslip);
@@ -31,7 +33,7 @@ function GeneratePayslip() {
     }
 
     async function fetchEmployees() {
-        const employeeList = await EmployeeApiFp(new Configuration({basePath: PEOPLE_BACKEND_HOST})).employeesList();
+        const employeeList = await EmployeeApiFp(new Configuration({accessToken: token, basePath: PEOPLE_BACKEND_HOST})).employeesList();
         try {
             const employeeListResponse = await employeeList(axios);
             dispatch(loadEmployees(employeeListResponse.data));
@@ -44,7 +46,7 @@ function GeneratePayslip() {
     }
 
     async function fetchPayslipMonth() {
-        const payslipMonth = await InvoicingMonthApiFp(new Configuration({basePath: INVOICES_BACKEND_HOST})).getCurrentPayslipMonth();
+        const payslipMonth = await InvoicingMonthApiFp(new Configuration({accessToken: token, basePath: INVOICES_BACKEND_HOST})).getCurrentPayslipMonth();
         try {
             const payslipMonthResponse = await payslipMonth(axios);
             dispatch(setPayslipMonth(payslipMonthResponse.data));
@@ -72,7 +74,7 @@ function GeneratePayslip() {
     }, []);
 
     async function savePayslip() {
-        const generatePayslip = await PayslipApiFp(new Configuration({basePath: INVOICES_BACKEND_HOST})).generatePayslip(selectedPayslip);
+        const generatePayslip = await PayslipApiFp(new Configuration({accessToken: token, basePath: INVOICES_BACKEND_HOST})).generatePayslip(selectedPayslip);
         try {
             await generatePayslip(axios);
             window.location.href = "/payslips";

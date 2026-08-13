@@ -13,5 +13,9 @@
   },
   "pagination": {
     "of": "{{from}} – {{until}} sur {{total}}"
+  },
+  "role": {
+    "admin": "Administrateur",
+    "employee": "Employé"
   }
 }

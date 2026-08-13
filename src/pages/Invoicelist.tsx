@@ -14,6 +14,7 @@ import {INVOICES_BACKEND_HOST, PEOPLE_BACKEND_HOST} from "../Constants.ts";
 import {Configuration, CustomerApiFp} from "../types/people";
 import axios from "axios";
 import {handleError} from "../redux/error.slice.ts";
+import {selectToken} from "../redux/account.slice.ts";
 
 const INV_STATUS_COLORS: Record<InvoiceStatus, string> = {
     Concept: "bg-gray-500/15 text-gray-400",
@@ -24,6 +25,7 @@ const INV_STATUS_COLORS: Record<InvoiceStatus, string> = {
 function Invoicelist() {
     const dispatch = useDispatch();
     const {t, i18n} = useTranslation();
+    const token = useSelector(selectToken);
     const invoices = useSelector(selectInvoices);
     const customers = useSelector(selectCustomers);
     const [search, setSearch] = useState("");
@@ -70,7 +72,7 @@ function Invoicelist() {
         const day = parseInt(moment(monthStart).format("D"));
         monthStart.subtract(day - 1, "days");
         const monthEnd = moment(monthStart).add(1, "month").subtract(1, "day")
-        const invoicesList = await InvoiceApiFp(new Configuration({basePath: INVOICES_BACKEND_HOST})).invoiceList(monthStart.format("YYYY-MM-DD"), monthEnd.format("YYYY-MM-DD"));
+        const invoicesList = await InvoiceApiFp(new Configuration({accessToken: token, basePath: INVOICES_BACKEND_HOST})).invoiceList(monthStart.format("YYYY-MM-DD"), monthEnd.format("YYYY-MM-DD"));
         try {
             const invoicesListResponse = await invoicesList(axios);
             dispatch(loadInvoices(invoicesListResponse.data));
@@ -95,7 +97,7 @@ function Invoicelist() {
     }, [monthOffset])
 
     async function fetchCustomers() {
-        const customersList = await CustomerApiFp(new Configuration({basePath: PEOPLE_BACKEND_HOST})).customersList();
+        const customersList = await CustomerApiFp(new Configuration({accessToken: token, basePath: PEOPLE_BACKEND_HOST})).customersList();
         try {
             const customersListListResponse = await customersList(axios);
             dispatch(loadCustomers(customersListListResponse.data));
@@ -117,7 +119,7 @@ function Invoicelist() {
 
     async function deleteInvoice(inv: Invoice) {
         if (inv.id) {
-            const deleteInvoice = await InvoiceApiFp(new Configuration({basePath: INVOICES_BACKEND_HOST})).deleteInvoice(inv.id);
+            const deleteInvoice = await InvoiceApiFp(new Configuration({accessToken: token, basePath: INVOICES_BACKEND_HOST})).deleteInvoice(inv.id);
             try {
                 await deleteInvoice(axios);
                 fetchInvoices()
@@ -178,7 +180,7 @@ function Invoicelist() {
                 <div key={label} className="bg-card rounded-lg px-5 py-4 border border-border">
                     <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1"
                        style={{fontFamily: "'DM Mono', monospace"}}>{label}</p>
-                    <p className={`text-xl font-semibold text-foreground ${mono ? "text-lg" : "text-2xl"}`}
+                    <p className={`text-2xl font-semibold text-foreground ${mono ? "text-lg" : "text-2xl"}`}
                        style={{fontFamily: "'Instrument Sans', sans-serif"}}>{value}</p>
                     <p className="text-xs text-muted-foreground mt-0.5">{sub}</p>
                 </div>

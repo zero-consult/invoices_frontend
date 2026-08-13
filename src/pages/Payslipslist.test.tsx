@@ -81,7 +81,7 @@ test('renders empty payslip list', async () => {
     axiosCalls.mockResolvedValueOnce(
         {data: [] as Payslip[]}
     )
-    const renderResult = render(<Provider store={store}><BrowserRouter><Payslipslist/></BrowserRouter></Provider>);
+    const renderResult = render(<Provider store={store.store}><BrowserRouter><Payslipslist/></BrowserRouter></Provider>);
     await waitFor(async () => {
         const tableItem = await renderResult.findAllByText("payslipslist.table.empty");
         expect(tableItem.length).toEqual(1);
@@ -100,7 +100,7 @@ test('renders payslip list', async () => {
     axiosCalls.mockResolvedValueOnce(
         {data: [PAY_1] as Payslip[]}
     )
-    const renderResult = render(<Provider store={store}><BrowserRouter><Payslipslist/></BrowserRouter></Provider>);
+    const renderResult = render(<Provider store={store.store}><BrowserRouter><Payslipslist/></BrowserRouter></Provider>);
     await waitForDataToBeLoaded(renderResult);
     expect(renderResult).toMatchSnapshot();
 });
@@ -116,7 +116,7 @@ test('can search payslips', async () => {
     axiosCalls.mockResolvedValueOnce(
         {data: [PAY_1] as Payslip[]}
     )
-    const renderResult = render(<Provider store={store}><BrowserRouter><Payslipslist/></BrowserRouter></Provider>);
+    const renderResult = render(<Provider store={store.store}><BrowserRouter><Payslipslist/></BrowserRouter></Provider>);
 
     await waitForDataToBeLoaded(renderResult);
 
@@ -144,7 +144,7 @@ test('sort on employee', async () => {
     axiosCalls.mockResolvedValueOnce(
         {data: [PAY_1, {...PAY_1, id: '2', employeeId: '2'}] as Payslip[]}
     )
-    const renderResult = render(<Provider store={store}><BrowserRouter><Payslipslist/></BrowserRouter></Provider>);
+    const renderResult = render(<Provider store={store.store}><BrowserRouter><Payslipslist/></BrowserRouter></Provider>);
     await waitFor(async () => {
         const tableItem = await renderResult.findAllByText("John Doe");
         expect(tableItem.length).toEqual(1);
@@ -168,7 +168,7 @@ test('delete payslip', async () => {
     axiosCalls.mockResolvedValueOnce(
         {data: [PAY_1] as Payslip[]}
     )
-    const renderResult = render(<Provider store={store}><BrowserRouter><Payslipslist/></BrowserRouter></Provider>);
+    const renderResult = render(<Provider store={store.store}><BrowserRouter><Payslipslist/></BrowserRouter></Provider>);
     await waitForDataToBeLoaded(renderResult);
 
     const deleteButton = renderResult.container.querySelector("#delete-1");
@@ -188,7 +188,7 @@ test('close payslip month', async () => {
     axiosCalls.mockResolvedValueOnce(
         {data: [PAY_1] as Payslip[]}
     )
-    const renderResult = render(<Provider store={store}><BrowserRouter><Payslipslist/></BrowserRouter></Provider>);
+    const renderResult = render(<Provider store={store.store}><BrowserRouter><Payslipslist/></BrowserRouter></Provider>);
     await waitForDataToBeLoaded(renderResult);
 
     let deleteButton = renderResult.container.querySelector("#delete-1");

@@ -13,5 +13,9 @@
   },
   "pagination": {
     "of": "{{total}} の {{from}} – {{until}}"
+  },
+  "role": {
+    "admin": "管理者",
+    "employee": "従業員"
   }
 }

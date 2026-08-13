@@ -20,10 +20,12 @@ import {Save} from "lucide-react";
 import {useTranslation} from "react-i18next";
 import {selectPayslipMonthFormatted, setPayslipMonth} from "../redux/invoicingMonth.slice.ts";
 import {useParams} from "react-router";
+import {selectToken} from "../redux/account.slice.ts";
 
 function GenerateInvoice() {
     const {t} = useTranslation();
     const dispatch = useDispatch();
+    const token = useSelector(selectToken);
     const {invoiceId} = useParams();
     const customers = useSelector(selectCustomers);
     const customerIds = useSelector(selectCustomerIds);
@@ -37,7 +39,7 @@ function GenerateInvoice() {
     const hiringRatePerHour = customers.find(c => c.id === invoice.customerId)?.hiringRatePerHour;
 
     async function fetchCustomers() {
-        const customersList = await CustomerApiFp(new Configuration({basePath: PEOPLE_BACKEND_HOST})).customersList();
+        const customersList = await CustomerApiFp(new Configuration({accessToken: token, basePath: PEOPLE_BACKEND_HOST})).customersList();
         try {
             const customersListListResponse = await customersList(axios);
             dispatch(loadCustomers(customersListListResponse.data));
@@ -51,7 +53,7 @@ function GenerateInvoice() {
 
     async function fetchCustomerDate() {
         if (invoice.customerId) {
-            const invoicingDateCustomer = await InvoiceApiFp(new Configuration({basePath: INVOICES_BACKEND_HOST})).getInvoiceDateOfCustomer(invoice.customerId, invoice.id);
+            const invoicingDateCustomer = await InvoiceApiFp(new Configuration({accessToken: token, basePath: INVOICES_BACKEND_HOST})).getInvoiceDateOfCustomer(invoice.customerId, invoice.id);
             try {
                 const invoiceDateCustomerResponse = await invoicingDateCustomer(axios);
                 if (invoiceDateCustomerResponse.status === 200) {
@@ -69,7 +71,7 @@ function GenerateInvoice() {
         if (invoiceFrom && invoiceFrom.isSameOrAfter(moment(payslipMonth).subtract(1, "day"))) {
             dispatch(loadTimesheetEntries([]));
         } else {
-            const timesheetList = await TimesheetApiFp(new Configuration({basePath: TIMESHEET_BACKEND_HOST})).timesheetsList((invoiceFrom || moment().subtract(5, "years")).format("YYYY-MM-DD"), invoice.invoiceUntil, undefined, invoice.customerId);
+            const timesheetList = await TimesheetApiFp(new Configuration({accessToken: token, basePath: TIMESHEET_BACKEND_HOST})).timesheetsList((invoiceFrom || moment().subtract(5, "years")).format("YYYY-MM-DD"), invoice.invoiceUntil, undefined, invoice.customerId);
             try {
                 const timesheetListResponse = await timesheetList(axios);
                 dispatch(loadTimesheetEntries(timesheetListResponse.data));
@@ -80,7 +82,7 @@ function GenerateInvoice() {
     }
 
     async function fetchPayslipMonth() {
-        const payslipMonth = await InvoicingMonthApiFp(new Configuration({basePath: INVOICES_BACKEND_HOST})).getCurrentPayslipMonth();
+        const payslipMonth = await InvoicingMonthApiFp(new Configuration({accessToken: token, basePath: INVOICES_BACKEND_HOST})).getCurrentPayslipMonth();
         try {
             const payslipMonthResponse = await payslipMonth(axios);
             dispatch(setPayslipMonth(payslipMonthResponse.data));
@@ -97,7 +99,7 @@ function GenerateInvoice() {
 
     async function fetchCustomerIdsWithConceptInvoice() {
         if (!invoiceId) {
-            const customersWithConceptInvoiceList = await InvoiceApiFp(new Configuration({basePath: INVOICES_BACKEND_HOST})).getCustomersWithConceptInvoices();
+            const customersWithConceptInvoiceList = await InvoiceApiFp(new Configuration({accessToken: token, basePath: INVOICES_BACKEND_HOST})).getCustomersWithConceptInvoices();
             try {
                 const customersWithConceptInvoiceListResponse = await customersWithConceptInvoiceList(axios);
                 dispatch(loadCustomerIds(customersWithConceptInvoiceListResponse.data));
@@ -120,10 +122,10 @@ function GenerateInvoice() {
 
     useEffect(() => {
         fetchTimesheets();
-    }, [invoiceFrom, invoice.customerId, invoice.invoiceUntil])
+    }, [invoiceFrom, invoice.customerId, invoice.invoiceUntil, payslipMonth])
 
     async function fetchInvoice(invoiceId: string) {
-        const invoiceFetch = await InvoiceApiFp(new Configuration({basePath: INVOICES_BACKEND_HOST})).getInvoice(invoiceId);
+        const invoiceFetch = await InvoiceApiFp(new Configuration({accessToken: token, basePath: INVOICES_BACKEND_HOST})).getInvoice(invoiceId);
         try {
             const invoiceFetchResponse = await invoiceFetch(axios);
             dispatch(loadSingleInvoice(invoiceFetchResponse.data));
@@ -142,7 +144,7 @@ function GenerateInvoice() {
 
     async function saveInvoice() {
         if (invoice.id && typeof invoice.id !== "undefined") {
-            const editInvoice = await InvoiceApiFp(new Configuration({basePath: INVOICES_BACKEND_HOST})).editInvoice(invoice.id, invoice);
+            const editInvoice = await InvoiceApiFp(new Configuration({accessToken: token, basePath: INVOICES_BACKEND_HOST})).editInvoice(invoice.id, invoice);
             try {
                 await editInvoice(axios);
                 window.location.href = "/invoices"
@@ -150,7 +152,7 @@ function GenerateInvoice() {
                 dispatch(handleError(error));
             }
         } else {
-            const generateInvoice = await InvoiceApiFp(new Configuration({basePath: INVOICES_BACKEND_HOST})).generateInvoice(invoice);
+            const generateInvoice = await InvoiceApiFp(new Configuration({accessToken: token, basePath: INVOICES_BACKEND_HOST})).generateInvoice(invoice);
             try {
                 await generateInvoice(axios);
                 window.location.href = "/invoices"
