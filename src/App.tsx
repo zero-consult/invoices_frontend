@@ -12,6 +12,7 @@ import Paysliplist from "./pages/Payslipslist.tsx";
 import GeneratePayslip from "./pages/GeneratePayslip.tsx";
 import GenerateInvoice from "./pages/GenerateInvoice.tsx";
 import {selectUser} from "./redux/account.slice.ts";
+import NotFound from "./pages/NotFound.tsx";
 
 function App() {
     const [collapsed, setCollapsed] = useState(false);
@@ -41,6 +42,7 @@ function App() {
                             className={"flex-1 flex flex-col min-w-0 bg-background overflow-y-auto" + (collapsed ? " pl-15" : " pl-60")}>
                             {/* Routes */}
                             <Routes>
+                                <Route path="*" element={<NotFound/>}/>
                                 <Route path="/invoices/" element={<Invoicelist/>}/>
                                 <Route path="/invoices/invoices" element={<Invoicelist/>}/>
                                 <Route path="/invoices/invoices/generate" element={<GenerateInvoice/>}/>
